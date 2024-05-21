@@ -22,14 +22,14 @@ ARG GOLANG_IMAGE=golang:1.22.2
 # deterministic builds. Follow what kubernetes uses to build
 # kube-controller-manager, for example for 1.27.x:
 # https://github.com/kubernetes/kubernetes/blob/release-1.27/build/common.sh#L99
-ARG DISTROLESS_IMAGE=registry.k8s.io/build-image/go-runner:v2.3.1-go1.22.2-bookworm.0
+ARG DISTROLESS_IMAGE=k8s.mirror.nju.edu.cn/build-image/go-runner:v2.3.1-go1.22.2-bookworm.0
 
 # We use Alpine as the source for default CA certificates and some output
 # images
 ARG ALPINE_IMAGE=alpine:3.17.5
 
 # cinder-csi-plugin uses Debian as a base image
-ARG DEBIAN_IMAGE=registry.k8s.io/build-image/debian-base:bullseye-v1.4.3
+ARG DEBIAN_IMAGE=k8s.mirror.nju.edu.cn/build-image/debian-base:bullseye-v1.4.3
 
 ################################################################################
 ##                              BUILD STAGE                                   ##
@@ -48,7 +48,7 @@ RUN apk add --no-cache ca-certificates
 # builder itself is always amd64
 FROM --platform=linux/amd64 ${GOLANG_IMAGE} as builder
 
-ARG GOPROXY=https://goproxy.io,direct
+ARG GOPROXY=https://goproxy.cn,direct
 ARG TARGETOS
 ARG TARGETARCH
 ARG VERSION
